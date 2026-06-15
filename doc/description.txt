@@ -1,1 +1,3 @@
-GUIs for esp32s3
+# esp32s3GUI
+
+Projekt benchmarkowy GUI na ESP32-S3: testowanie różnych realizacji interfejsu LVGL na „zmyślonych” danych, z obsługą wielu modeli wyświetlaczy i motywów kolorystycznych.

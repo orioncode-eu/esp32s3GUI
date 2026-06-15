@@ -1,0 +1,75 @@
+menu "esp32s3GUI Display Configuration"
+
+    choice ESP32S3GUI_DISPLAY
+        prompt "Select display type"
+        default ESP32S3GUI_DISPLAY_ST7796_480x320
+        help
+            Select the target display hardware. The choice affects
+            driver initialization and layout proportions (compile-time).
+
+        config ESP32S3GUI_DISPLAY_STUB
+            bool "Stub (printf to terminal, no physical display)"
+
+        config ESP32S3GUI_DISPLAY_ILI9341_320x240
+            bool "ILI9341 320x240 (landscape, SPI)"
+
+        config ESP32S3GUI_DISPLAY_ST7789_240x240
+            bool "ST7789 240x240 (square, SPI)"
+
+        config ESP32S3GUI_DISPLAY_GC9A01_240x240
+            bool "GC9A01 240x240 (round, SPI)"
+
+        config ESP32S3GUI_DISPLAY_ST7796_480x320
+            bool "ONX3248G035 – ST7796 480x320 landscape (Nextion 3.5\")"
+
+    endchoice
+
+    config ESP32S3GUI_DISPLAY_WIDTH
+        int
+        default 0   if ESP32S3GUI_DISPLAY_STUB
+        default 320 if ESP32S3GUI_DISPLAY_ILI9341_320x240
+        default 240 if ESP32S3GUI_DISPLAY_ST7789_240x240
+        default 240 if ESP32S3GUI_DISPLAY_GC9A01_240x240
+        default 480 if ESP32S3GUI_DISPLAY_ST7796_480x320
+
+    config ESP32S3GUI_DISPLAY_HEIGHT
+        int
+        default 0   if ESP32S3GUI_DISPLAY_STUB
+        default 240 if ESP32S3GUI_DISPLAY_ILI9341_320x240
+        default 240 if ESP32S3GUI_DISPLAY_ST7789_240x240
+        default 240 if ESP32S3GUI_DISPLAY_GC9A01_240x240
+        default 320 if ESP32S3GUI_DISPLAY_ST7796_480x320
+
+endmenu
+
+menu "esp32s3GUI Orientation"
+
+    config ESP32S3GUI_FORCE_PORTRAIT
+        bool "Force portrait orientation (ONX3248G035 test)"
+        default n
+        depends on ESP32S3GUI_DISPLAY_ST7796_480x320
+        help
+            TEST ONLY. Boots the ONX3248G035 panel in portrait (320x480)
+            instead of native landscape (480x320). Display and touch use the
+            same orientation constants (bsp_onx_pinmap.h).
+
+endmenu
+
+menu "esp32s3GUI Theme"
+
+    choice ESP32S3GUI_THEME
+        prompt "UI color theme (skin)"
+        default ESP32S3GUI_THEME_DARK
+        help
+            Compile-time UI palette. Add new options here and matching colors
+            in ui_theme.c when benchmarking additional skins.
+
+        config ESP32S3GUI_THEME_DARK
+            bool "Dark (default)"
+
+        config ESP32S3GUI_THEME_LIGHT
+            bool "Light"
+
+    endchoice
+
+endmenu

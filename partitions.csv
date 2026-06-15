@@ -1,0 +1,6 @@
+# esp32s3GUI - minimal partition table (GUI benchmark, no OTA)
+# Flash: 16 MB
+#
+# Name,   Type, SubType, Offset,  Size,     Flags
+nvs,      data, nvs,     0x9000,  0x6000,
+factory,  app,  factory, 0x10000, 0x400000,

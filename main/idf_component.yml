@@ -1,0 +1,8 @@
+## IDF Component Manager Manifest File
+## Ograniczenia wersji wyrównane do HEOStation_Sonnet – ten sam sprzęt (ONX3248G035).
+## Luźne ">=" – wersje rozwiązuje Component Manager (dependencies.lock po buildzie).
+dependencies:
+  idf: ">=5.4.0"
+  lvgl/lvgl: ">=9.0.0,<10.0.0"
+  espressif/esp_lvgl_port: ">=2.0.0"
+  espressif/esp_lcd_touch: ">=1.0.0"
