@@ -1,6 +1,6 @@
 /**
  * @file ui_task.c
- * @brief esp32s3GUI – UI task: init display + ekran listy wyboru.
+ * @brief esp32s3GUI – UI task: init display + ekran karuzeli.
  */
 
 #include "ui_task.h"
@@ -16,7 +16,7 @@ static const char *TAG = "ui_task";
 #ifndef CONFIG_ESP32S3GUI_DISPLAY_STUB
     #include "display_driver.h"
     #include "esp_lvgl_port.h"
-    #include "screen_list.h"
+    #include "screen_carousel.h"
     #include "ui_theme.h"
     #include "ui_fps.h"
 #endif
@@ -43,7 +43,7 @@ void ui_task(void *arg)
     ui_fps_init();
 
     if (lvgl_port_lock(0)) {
-        (void)screen_list_load();
+        (void)screen_carousel_load();
         lvgl_port_unlock();
     } else {
         ESP_LOGE(TAG, "Initial lvgl_port_lock failed");
