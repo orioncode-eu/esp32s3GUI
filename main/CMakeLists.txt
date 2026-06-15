@@ -37,7 +37,7 @@ set(UI_SOURCES
 
 if(NOT CONFIG_ESP32S3GUI_DISPLAY_STUB)
     list(APPEND UI_SOURCES
-        "ui/screens/screen_list.c"
+        "ui/screens/screen_strony.c"
         "ui/core/ui_theme.c"
         "ui/core/ui_kit.c"
         "ui/core/ui_fps.c"
